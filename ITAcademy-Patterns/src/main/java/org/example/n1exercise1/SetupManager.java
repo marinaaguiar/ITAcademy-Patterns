@@ -26,8 +26,7 @@ public class SetupManager {
                     scanner.close();
                     break;
                 case 1:
-                    System.out.print("Enter command: ");
-                    String command = scanner.nextLine();
+                    String command = Input.readString("Enter command: ");
                     undoManager.addCommand(command);
                     message = "Command added";
                     break;
