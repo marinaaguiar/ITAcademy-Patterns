@@ -1,18 +1,18 @@
-package org.example.n2exercise1.countries;
+package org.example.n2exercise1.details;
 
 import org.example.n2exercise1.Country;
 import org.example.n2exercise1.InvalidFormatException;
-import org.example.n2exercise1.interfaces.PhoneDetails;
+import org.example.n2exercise1.interfaces.PhoneDetailsInterface;
 
-public class USPhoneDetails implements PhoneDetails {
+public class PhoneDetails implements PhoneDetailsInterface {
     private String areaCode;
     private String phoneNumber;
     private Country country;
 
     @Override
     public void setPhoneNumber(String areaCode, String phoneNumber) throws InvalidFormatException {
-        if (country != null && !country.isPhoneNumberFormatCorrect("(" + areaCode + ")" + " " + phoneNumber)) {
-            throw new InvalidFormatException(phoneNumber, country.getName());
+        if (country != null && !country.isAreaCodeFormatCorrect(areaCode) && !country.isPhoneNumberFormatCorrect(phoneNumber)) {
+            throw new InvalidFormatException(areaCode, phoneNumber, country);
         }
         this.areaCode = areaCode;
         this.phoneNumber = phoneNumber;
@@ -20,7 +20,7 @@ public class USPhoneDetails implements PhoneDetails {
 
     @Override
     public String getPhoneNumber() {
-        return "(" + areaCode + ") " + phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(4);
+        return country.getCountryCode() + " (" + areaCode + ") " + phoneNumber;
     }
 
     @Override
@@ -31,6 +31,11 @@ public class USPhoneDetails implements PhoneDetails {
     @Override
     public Country getCountry() {
         return this.country;
+    }
+
+    @Override
+    public String toString() {
+        return getPhoneNumber();
     }
 }
 

@@ -1,9 +1,9 @@
-package org.example.n2exercise1.countries;
+package org.example.n2exercise1.details;
 
 import org.example.n2exercise1.Country;
-import org.example.n2exercise1.interfaces.AddressDetails;
+import org.example.n2exercise1.interfaces.AddressDetailsInterface;
 
-public class USAddressDetails implements AddressDetails {
+public class AddressDetails implements AddressDetailsInterface {
     private String city;
     private String street;
     private int number;
@@ -31,6 +31,11 @@ public class USAddressDetails implements AddressDetails {
     @Override
     public Country getCountry() {
         return this.country;
+    }
+
+    @Override
+    public String toString() {
+        return getAddressDetails();
     }
 }
 

@@ -44,16 +44,4 @@ public class Input {
         }
     }
 
-    public static double readDouble(String message) {
-        Scanner scannerDouble = new Scanner(System.in);
-        try {
-            System.out.print(message);
-            double intInfo = scannerDouble.nextDouble();
-            return intInfo;
-        } catch (InputMismatchException e) {
-            scannerDouble.nextLine();
-            throw new InputMismatchException("Input Invalid! Format Error: Expected an Int format - (e.g. 1).");
-        }
-    }
-
 }
