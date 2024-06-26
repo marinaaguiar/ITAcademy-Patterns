@@ -12,8 +12,7 @@ public class PhoneBookManager implements PhonebookInterface {
     private List<CompleteContact> contacts = new ArrayList<>();
 
     private ContactDetails contactFactory;
-    String areaCode;
-    String phoneNumber;
+    Country country;
 
     public PhoneBookManager(ContactDetails contactFactory) {
         this.contactFactory = contactFactory;
@@ -54,15 +53,17 @@ public class PhoneBookManager implements PhonebookInterface {
     private String createANewContact() {
         String name = Input.readString("Insert a contact name: ");
         contactFactory.setContactName(name);
-        Country country = getCountry();
+        this.country = getCountry();
         String city = Input.readString("Insert a name of a city: ");
         String street = Input.readString("Insert a name of a street: ");
         int number = Input.readInt("Insert the number: ");
-        int postalCode = Input.readInt("Insert the postal code: ");
+        String postalCode = askForPostalCode();
         AddressDetails address = addAddress(country, city, street, number, postalCode);
-        askForPhoneContact();
-        PhoneDetails phone = addPhone(country, areaCode, phoneNumber);
 
+        String areaCode = askForAreaCode();
+        String phoneNumber = askForPhoneNumber();
+        PhoneDetails phone = addPhone(country, areaCode, phoneNumber);
+        
         List<AddressDetails> addresses = new ArrayList<>();
         addresses.add(address);
         List<PhoneDetails> phoneNumbers = new ArrayList<>();
@@ -119,15 +120,38 @@ public class PhoneBookManager implements PhonebookInterface {
         }
     }
 
-    private void askForPhoneContact() {
+    private String askForAreaCode() {
         String areaCode = Input.readString("Add the area code: ");
+        if (country != null && !country.isAreaCodeFormatCorrect(areaCode)) {
+            System.out.println("Area code format not valid." +
+                    "\nTry using this format instead: " + country.getAreaCodeFormat());
+            areaCode = askForAreaCode();
+        }
+        return areaCode;
+    }
+
+    private String askForPhoneNumber() {
         String phoneNumber = Input.readString("Add the phone number: ");
-        this.areaCode = areaCode;
-        this.phoneNumber = phoneNumber;
+        if (country != null && !country.isPhoneNumberFormatCorrect(phoneNumber)) {
+            System.out.println("Postal code format not valid." +
+                    "\nTry using this format instead: " + country.getPhoneNumberFormat());
+            phoneNumber = askForPhoneNumber();
+        }
+        return phoneNumber;
+    }
+
+    private String askForPostalCode() {
+        String postalCode = Input.readString("Insert the postal code: ");
+        if (country != null && !country.isPostalCodeFormatCorrect(postalCode)) {
+            System.out.println("Postal code format not valid." +
+                    "\nTry using this format instead: " + country.getPostalCodeFormat());
+            postalCode = askForPostalCode();
+        }
+        return postalCode;
     }
 
     @Override
-    public AddressDetails addAddress(Country country, String city, String street, int number, int postalCode) {
+    public AddressDetails addAddress(Country country, String city, String street, int number, String postalCode) {
         AddressDetails address = contactFactory.createAddressDetails(country);
         address.setAddressDetails(city, street, number, postalCode);
         return address;
@@ -136,12 +160,7 @@ public class PhoneBookManager implements PhonebookInterface {
     @Override
     public PhoneDetails addPhone(Country country, String areaCode, String phoneNumber) {
         PhoneDetails phone = contactFactory.createPhoneDetails(country);
-        try {
-            phone.setPhoneNumber(areaCode, phoneNumber);
-        } catch (InvalidFormatException e) {
-            System.out.println(e.getMessage());
-            askForPhoneContact();
-        }
+        phone.setPhoneNumber(areaCode, phoneNumber);
         return phone;
     }
 }

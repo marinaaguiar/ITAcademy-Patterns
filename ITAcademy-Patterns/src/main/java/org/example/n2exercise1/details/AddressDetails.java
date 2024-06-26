@@ -1,17 +1,18 @@
 package org.example.n2exercise1.details;
 
 import org.example.n2exercise1.Country;
+import org.example.n2exercise1.InvalidFormatException;
 import org.example.n2exercise1.interfaces.AddressDetailsInterface;
 
 public class AddressDetails implements AddressDetailsInterface {
     private String city;
     private String street;
     private int number;
-    private int postalCode;
+    private String postalCode;
     private Country country;
 
     @Override
-    public void setAddressDetails(String city, String street, int number, int postalCode) {
+    public void setAddressDetails(String city, String street, int number, String postalCode) {
         this.city = city;
         this.street = street;
         this.number = number;

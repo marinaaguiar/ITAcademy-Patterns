@@ -6,4 +6,9 @@ public class InvalidFormatException extends Exception {
                 "\nConsider using this area code format: " + country.getAreaCodeFormat() +
                 "\nConsider using this number format: " + country.getPhoneNumberFormat());
     }
+
+    public InvalidFormatException(String postalCode, Country country) {
+        super("Invalid postal code format: " + postalCode + " for country: " + country.getName() +
+                "\nConsider using this postal code format: " + country.getPostalCodeFormat());
+    }
 }

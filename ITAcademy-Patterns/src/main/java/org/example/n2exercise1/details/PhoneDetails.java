@@ -10,10 +10,7 @@ public class PhoneDetails implements PhoneDetailsInterface {
     private Country country;
 
     @Override
-    public void setPhoneNumber(String areaCode, String phoneNumber) throws InvalidFormatException {
-        if (country != null && !country.isAreaCodeFormatCorrect(areaCode) && !country.isPhoneNumberFormatCorrect(phoneNumber)) {
-            throw new InvalidFormatException(areaCode, phoneNumber, country);
-        }
+    public void setPhoneNumber(String areaCode, String phoneNumber) {
         this.areaCode = areaCode;
         this.phoneNumber = phoneNumber;
     }
