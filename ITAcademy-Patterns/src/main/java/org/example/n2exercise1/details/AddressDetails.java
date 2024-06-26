@@ -1,7 +1,6 @@
 package org.example.n2exercise1.details;
 
 import org.example.n2exercise1.Country;
-import org.example.n2exercise1.InvalidFormatException;
 import org.example.n2exercise1.interfaces.AddressDetailsInterface;
 
 public class AddressDetails implements AddressDetailsInterface {
