@@ -1,6 +1,4 @@
-package org.example.n1exercise1;
-
-import java.util.Scanner;
+package org.example.task1.n1exercise1;
 
 public class Main {
     public static void main(String[] args) {

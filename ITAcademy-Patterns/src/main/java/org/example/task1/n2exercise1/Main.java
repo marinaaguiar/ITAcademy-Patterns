@@ -1,6 +1,6 @@
-package org.example.n2exercise1;
+package org.example.task1.n2exercise1;
 
-import org.example.n2exercise1.details.ContactDetails;
+import org.example.task1.n2exercise1.details.ContactDetails;
 
 public class Main {
     public static void main(String[] args) {

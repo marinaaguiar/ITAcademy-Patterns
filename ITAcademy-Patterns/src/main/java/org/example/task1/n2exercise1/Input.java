@@ -1,4 +1,4 @@
-package org.example.n2exercise1;
+package org.example.task1.n2exercise1;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

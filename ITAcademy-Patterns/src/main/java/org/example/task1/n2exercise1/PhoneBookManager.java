@@ -1,9 +1,9 @@
-package org.example.n2exercise1;
+package org.example.task1.n2exercise1;
 
-import org.example.n2exercise1.details.AddressDetails;
-import org.example.n2exercise1.details.ContactDetails;
-import org.example.n2exercise1.details.PhoneDetails;
-import org.example.n2exercise1.interfaces.PhonebookInterface;
+import org.example.task1.n2exercise1.details.AddressDetails;
+import org.example.task1.n2exercise1.details.ContactDetails;
+import org.example.task1.n2exercise1.details.PhoneDetails;
+import org.example.task1.n2exercise1.interfaces.PhonebookInterface;
 
 import java.util.ArrayList;
 import java.util.List;

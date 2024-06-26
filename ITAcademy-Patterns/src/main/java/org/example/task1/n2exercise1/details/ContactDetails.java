@@ -1,19 +1,39 @@
-package org.example.n2exercise1;
+package org.example.task1.n2exercise1.details;
 
-import org.example.n2exercise1.details.AddressDetails;
-import org.example.n2exercise1.details.PhoneDetails;
+import org.example.task1.n2exercise1.Country;
+import org.example.task1.n2exercise1.interfaces.ContactDetailsInterface;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-public class CompleteContact {
+public class ContactDetails implements ContactDetailsInterface {
+    private List<AddressDetails> addresses = new ArrayList<>();
+    private List<PhoneDetails> phoneNumbers = new ArrayList<>();
+    private String contactID;
     private String name;
-    private List<AddressDetails> addresses;
-    private List<PhoneDetails> phoneNumbers;
 
-    public CompleteContact(String name, List<AddressDetails> addresses, List<PhoneDetails> phoneNumbers) {
+    public ContactDetails() {
+        contactID = UUID.randomUUID().toString();
+    }
+
+    @Override
+    public void setContactName(String name) {
         this.name = name;
-        this.addresses = addresses;
-        this.phoneNumbers = phoneNumbers;
+    }
+
+    @Override
+    public AddressDetails createAddressDetails(Country country) {
+        AddressDetails address = new AddressDetails();
+        address.setCountry(country);
+        return address;
+    }
+
+    @Override
+    public PhoneDetails createPhoneDetails(Country country) {
+        PhoneDetails phoneNumber = new PhoneDetails();
+        phoneNumber.setCountry(country);
+        return phoneNumber;
     }
 
     public String getName() {
@@ -50,5 +70,4 @@ public class CompleteContact {
         }
         return sb.toString();
     }
-
 }

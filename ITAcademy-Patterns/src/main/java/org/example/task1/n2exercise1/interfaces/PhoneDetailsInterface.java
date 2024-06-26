@@ -1,6 +1,6 @@
-package org.example.n2exercise1.interfaces;
+package org.example.task1.n2exercise1.interfaces;
 
-import org.example.n2exercise1.Country;
+import org.example.task1.n2exercise1.Country;
 //import org.example.n2exercise1.InvalidFormatException;
 
 public interface PhoneDetailsInterface {

@@ -1,7 +1,7 @@
-package org.example.n2exercise1.details;
+package org.example.task1.n2exercise1.details;
 
-import org.example.n2exercise1.Country;
-import org.example.n2exercise1.interfaces.PhoneDetailsInterface;
+import org.example.task1.n2exercise1.Country;
+import org.example.task1.n2exercise1.interfaces.PhoneDetailsInterface;
 
 public class PhoneDetails implements PhoneDetailsInterface {
     private String areaCode;
