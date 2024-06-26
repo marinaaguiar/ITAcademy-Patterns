@@ -1,4 +1,4 @@
-package org.example;
+package org.example.n1exercise1;
 
 public class StockManager implements Observer {
     private String name;
