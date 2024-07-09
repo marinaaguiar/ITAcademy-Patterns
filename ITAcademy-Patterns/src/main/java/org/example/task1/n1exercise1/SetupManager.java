@@ -5,14 +5,12 @@ import java.util.Scanner;
 
 public class SetupManager {
 
-    Scanner scanner = new Scanner(System.in);
-    Undo undoManager = Undo.getInstance();
+    private Undo undoManager = Undo.getInstance();
 
     public void startMenu() {
         int option = 0;
         String message = "";
         do {
-            message = "";
             option = Input.readInt(
                     "0. Exit\n" +
                             "1. Add Command\n" +
@@ -23,22 +21,23 @@ public class SetupManager {
             switch (option) {
                 case 0:
                     message = "Exiting...";
-                    scanner.close();
+                    Input.closeScanner();
                     break;
                 case 1:
                     String command = Input.readString("Enter command: ");
                     undoManager.addCommand(command);
-                    message = "Command added";
+                    message = "New command: " + command + " added!\n";
                     break;
                 case 2:
                     undoManager.removeCommand();
-                    message = "Last command removed.";
+                    message = "Last command removed!\n";
                     break;
                 case 3:
                     List<String> commands = undoManager.listCommands();
                     if (commands.isEmpty()) {
-                        System.out.println("The commands history is empty.");
+                        message = "The commands history is empty.\n";
                     } else {
+                        message = "";
                         System.out.println("Command History: ");
                         for (String cmd : commands) {
                             System.out.println(cmd);
@@ -46,9 +45,10 @@ public class SetupManager {
                     }
                     break;
                 default:
-                    message = "Invalid option. Please try again.";
+                    message = "Invalid option. Please try again.\n";
             }
             System.out.println(message);
         } while (option != 0);
     }
 }
+

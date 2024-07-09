@@ -7,6 +7,8 @@ public class Undo {
     private static Undo singleInstance = null;
     private List<String> commandHistory = new ArrayList<>();
 
+    private Undo() {}
+
     public static Undo getInstance() {
         if (singleInstance == null) {
             singleInstance = new Undo();
