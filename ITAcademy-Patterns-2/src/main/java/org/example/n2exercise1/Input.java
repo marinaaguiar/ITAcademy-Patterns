@@ -2,45 +2,30 @@ package org.example.n2exercise1;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Input {
-    private static Scanner scanner = new Scanner(System.in);
-
-    private static void exception(Exception e) {
-        System.out.println("Invalid format.");
-        scanner.nextLine();
-    }
-
-    private static void inputMismatchException(Exception e) {
-        System.out.println("Invalid format.");
-        scanner.nextLine();
-    }
 
     public static String readString(String message) {
         Scanner scannerString = new Scanner(System.in);
-        Boolean isValid  = false;
-        String userInput = "";
-        while  (!isValid && userInput.length() == 0) {
-            try {
-                System.out.println(message);
-                userInput = scannerString.nextLine();
-                isValid = true;
-            } catch (Exception e) {
-                System.out.println("Format Error. Introduce a String.");
-            }
+        try {
+            System.out.println(message);
+            return scannerString.nextLine();
+        } catch (Exception e) {
+            System.out.println("Format Error. Introduce a String.");
+            return readString(message);
         }
-        return userInput;
     }
 
     public static int readInt(String message) {
         Scanner scannerInt = new Scanner(System.in);
         try {
             System.out.print(message);
-            int intInfo = scannerInt.nextInt();
-            return intInfo;
+            return scannerInt.nextInt();
         } catch (InputMismatchException e) {
-            scannerInt.nextLine();
-            throw new InputMismatchException("Input Invalid! Format Error: Expected an Int format - (e.g. 1).");
+            System.out.println("Input Invalid! Format Error: Expected an Int format - (e.g. 1).");
+            return readInt(message);
         }
     }
 
@@ -48,11 +33,32 @@ public class Input {
         Scanner scannerDouble = new Scanner(System.in);
         try {
             System.out.print(message);
-            double intInfo = scannerDouble.nextDouble();
-            return intInfo;
+            return scannerDouble.nextDouble();
         } catch (InputMismatchException e) {
-            scannerDouble.nextLine();
-            throw new InputMismatchException("Input Invalid! Format Error: Expected an Double format - (e.g. 1.0).");
+            System.out.println("Input Invalid! Format Error: Expected an Double format - (e.g. 1.0).");
+            return readDouble(message);
         }
+    }
+
+    public static String readEmailString(String message) {
+        Scanner scannerString = new Scanner(System.in);
+        try {
+            System.out.println(message);
+            String userInput = scannerString.nextLine();
+            if (isValidEmail(userInput)) {
+                return userInput;
+            } else {
+                System.out.println("Format Error. Try to come up with an email format e.g. name@gmail.com");
+                return readEmailString(message);
+            }
+        } catch (Exception e) {
+            System.out.println("Format Error. Introduce a String.");
+            return readString(message);
+        }
+    }
+
+    public static boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+        return email.matches(regex);
     }
 }
